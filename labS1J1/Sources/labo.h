@@ -1,10 +1,13 @@
 /*
 * Déclarer une structure de donnée qui va s'appeler String. La structure va avoir une propriété characters et une propriété length.
 */
-
+typedef struct {
+	char characters[512];
+	unsigned int length;
+} String;
 
 /*
-* Faire une fonction qui retourne a sous-tableau de character de celui passer. 
+* Faire une fonction qui retourne un sous-tableau de character de celui passer. 
 */
 char* sousTexte(char* texte, int from, int to);
 
