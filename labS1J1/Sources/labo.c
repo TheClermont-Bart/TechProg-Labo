@@ -12,8 +12,6 @@ char* sousTexte(char* texte, int from, int to)
 
 void set_String(char* text, String* s)
 {
-    int str_leng = s->length;
-
     for (int i = 0; text[i] != 0; i++) {
         s->characters[i] = text[i];
     }
@@ -29,6 +27,7 @@ int String_is_palindrome(String* s)
             palindrome++;
         }
     }
+
     if (palindrome == s->length) {
         return 1;
     }
