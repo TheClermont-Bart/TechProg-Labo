@@ -21,29 +21,29 @@ void swap(int* a, int* b)
 	*b = temp;
 }
 
-void quickSort(int* elements, int left, int right) //Ca aurait ete le fun avoir un print du tableau dans le resultat question de voir nos manipulation .... 
+void quickSort(int* elements, int left, int right)
 {
 	if (left >= right) {
 		return;
 	}
 
-	int pivot = elements[left]; //Premier elements du tableau
+	int pivot = elements[left];
 	int i = left + 1; 
 	int j = right;
 	int temp;
 
 	while (i <= j) {
-		while (i <= right && elements[i] <= pivot) // O(n)
+		while (i <= right && elements[i] <= pivot) 
 		{
 			i++;
 		}
 	
-		while (elements[j] > pivot) // O(n)
+		while (elements[j] > pivot)
 		{ 
 			j--;
 		}
 	
-		if (i < j) // O(1)
+		if (i < j) 
 		{
 			swap(&elements[i], &elements[j]);
 			i++;
@@ -52,6 +52,6 @@ void quickSort(int* elements, int left, int right) //Ca aurait ete le fun avoir 
 	}
 	swap(&elements[left], &elements[j]);
 
-	quickSort(elements, left, j - 1); //Recursion
-	quickSort(elements, j + 1, right); // Recursion
+	quickSort(elements, left, j - 1); 
+	quickSort(elements, j + 1, right); 
 }
