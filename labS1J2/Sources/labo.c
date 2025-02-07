@@ -55,5 +55,3 @@ void quickSort(int* elements, int left, int right) //Ca aurait ete le fun avoir 
 	quickSort(elements, left, j - 1); //Recursion
 	quickSort(elements, j + 1, right); // Recursion
 }
-
-// O(nlogn)
