@@ -1,0 +1,6 @@
+name NicolaBolas,age 25000
+name BjarneStroustrup,age 71
+name LinusTorvalds,age 52
+name RichardStallman,age 68
+name JohnMcCarthy,age 84
+name JustineTunney,age 36
