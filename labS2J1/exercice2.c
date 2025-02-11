@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#define RANGE 9
+#define RANGE 9 // O(1)
 
 void sort(int arr[], int length)
 {
@@ -32,7 +32,7 @@ int main()
 {
     int arr[] = {9, 1, 4, 8, 9, 7, 5, 2,1,2}; // O(1)
 
-    sort(arr,9); // O(n) + O(k)
+    sort(arr,9); // O(n) 
     printf("Sorted array is: ");
     int i = 0; // O(1)
     for(; arr[i+1]; ++i ){ // O(1)
@@ -42,4 +42,4 @@ int main()
 
     return 0;
 }
-// Je pense ca serait O(n)
+// O(n)

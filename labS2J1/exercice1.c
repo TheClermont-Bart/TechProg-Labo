@@ -14,7 +14,7 @@ void sort(int arr[], int n)
             if (arr[y] < arr[id_minimum])
                 id_minimum = y;
         }
-        // O(n)+O(n)=O(n^2) -> Loop dans loop
+      
 
         int temp = arr[id_minimum];
         arr[id_minimum] = arr[i];
@@ -29,12 +29,10 @@ int main()
 	sort(arr, n); // O(n^2)
 	printf("Sorted array is: ");
 
-    int i = 0;
+    int i = 0; // O(1)
     for(; i < n-1; ++i ){   // O(n)
         printf(" %i,",arr[i]);
     }
     printf(" %i\n",arr[i]);
 	return 0;
 }
-
-// [O(n)+O(n)] + O(1) + O(1) + O(n) = O(n^2) -> Loop dans loop + O(1) qui disparait + O(n) le O(n^2) prend le dessus.

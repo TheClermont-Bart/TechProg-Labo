@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void combine(int arr[], int left, int m, int right)
+void combine(int arr[], int left, int m, int right) // O(n+k)
 {
 	int i, j, k;
 	int n1 = m - left + 1;
@@ -10,15 +10,16 @@ void combine(int arr[], int left, int m, int right)
 	
 	int Left[128], Right[128];
 
-	for (i = 0; i < n1; i++)
+	for (i = 0; i < n1; i++) // O(n)
 		Left[i] = arr[left + i];
-	for (j = 0; j < n2; j++)
+
+	for (j = 0; j < n2; j++) // O(k)
 		Right[j] = arr[m + 1 + j];
 
 	i = 0;
 	j = 0; 
 	k = left; 
-	while (i < n1 && j < n2) {
+	while (i < n1 && j < n2) { // O(n+k)
 		if (Left[i] <= Right[j]) {
 			arr[k] = Left[i];
 			i++;
@@ -30,13 +31,13 @@ void combine(int arr[], int left, int m, int right)
 		k++;
 	}
 
-	while (i < n1) {
+	while (i < n1) { // O(n)
 		arr[k] = Left[i];
 		i++;
 		k++;
 	}
 
-	while (j < n2) {
+	while (j < n2) { // O(k)
 		arr[k] = Right[j];
 		j++;
 		k++;
@@ -49,8 +50,8 @@ void sort(int arr[], int left, int right)
 	if (left < right) {
 		int m = left + (right - left) / 2;
 
-		sort(arr, left, m);
-		sort(arr, m + 1, right);
+		sort(arr, left, m); // O(n) O(n)
+		sort(arr, m + 1, right); // O(n) O(n)
 
 		combine(arr, left, m, right);
 	}
@@ -65,4 +66,4 @@ int main()
 	sort(arr, 0, (sizeof(arr) / sizeof(arr[0])) - 1);
 
 	return 0;
-}
+} // O(n+k)

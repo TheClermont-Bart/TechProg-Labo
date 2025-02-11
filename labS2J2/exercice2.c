@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <string.h>
 
-size_t strlen(char* str){
-    size_t i = 0;
-    while(str[i] != '\0'){
+size_t strlen(char* str){ // O(n)
+    size_t i = 0; // O(1)
+    while(str[i] != '\0'){ // O(n)
         ++i;
     }
     return i;
@@ -12,21 +12,21 @@ size_t strlen(char* str){
 //Main fourni à titre d'exemple
 int main()
 {
-   char* str = "Hello this is a test";
-   char* find = "test";
-   static char sub[128] = {0};
-    size_t len = strlen(str);
-   while(1){
+   char* str = "Hello this is a test"; // O(1)
+   char* find = "test"; // O(1)
+   static char sub[128] = {0}; // O(1)
+    size_t len = strlen(str); // O(n)
+   while(1){ // O(n)
        int i = 0;
-       while(str[i] != ' '){
+       while(str[i] != ' '){ // O(n)
            sub[i] = str[i];
-           if(strlen(sub) >= len){
+           if(strlen(sub) >= len){ // O(n)
                break;
            }
            ++i;
        }
        str = &str[i];
-       if(strcmp(sub,find) == 0){
+       if(strcmp(sub,find) == 0){ // O(n)
            printf("Found\n");
        }
        if(i > len || str[1] == '\0'){
@@ -34,4 +34,4 @@ int main()
        }
    }
     return 0;
-}
+} // O(n^2)

@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 void sort(int* arr,int length){
-    int y = 0;
+    int y = 0; // O(1)
     for(int i = length; i >= 0;){ // O(n)
         arr[y] = arr[--i];
         if(i < 0){
@@ -17,10 +17,10 @@ int main(int argc, char** argv){
     sort(arr,len); //O(n)
     printf("Sorted array is: ");
 
-    int i = 0;
+    int i = 0; // O(1)
     for(; arr[i+1]; ++i ){ //O(n)
         printf(" %i,",arr[i]);
     }
     printf(" %i",arr[i]);
 }
-// O(1)+O(1)+O(n)+O(n) = O(n)
+// O(n)

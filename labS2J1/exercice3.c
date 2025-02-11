@@ -21,10 +21,10 @@ int search(int* arr,int n, int key){
 int main()
 {
 	int arr[] = {4,7,6,5,9,1,2}; // O(1)
-    int index = search(arr,7,2); // O(1)
+    int index = search(arr,7,2); // O(n) O(n)
 
     printf("Index : %i",index);
 
 	return 0;
 }
-// 
+//  2 * O(n) = O(2^n)
