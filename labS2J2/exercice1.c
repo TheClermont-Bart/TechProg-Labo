@@ -29,7 +29,7 @@ void sort (int a[], int n){
       }
       i = 0;
       for (k = 0; k < RANGE; k++){ // O(1)
-         for (j = 0; j < bucket_count[k]; j++){ // O(n)
+         for (j = 0; j < bucket_count[k]; j++){ // O(1)
             a[i] = bucket[k][j];
             i++;
          }
@@ -43,4 +43,4 @@ int main (){
 
    sort (arr, n);
    return 0;
-} // O(n)
+} // O(nlogn)

@@ -13,13 +13,13 @@ void combine(int arr[], int left, int m, int right) // O(n+k)
 	for (i = 0; i < n1; i++) // O(n)
 		Left[i] = arr[left + i];
 
-	for (j = 0; j < n2; j++) // O(k)
+	for (j = 0; j < n2; j++) // O(n)
 		Right[j] = arr[m + 1 + j];
 
 	i = 0;
 	j = 0; 
 	k = left; 
-	while (i < n1 && j < n2) { // O(n+k)
+	while (i < n1 && j < n2) { // O(n)
 		if (Left[i] <= Right[j]) {
 			arr[k] = Left[i];
 			i++;
@@ -50,8 +50,8 @@ void sort(int arr[], int left, int right)
 	if (left < right) {
 		int m = left + (right - left) / 2;
 
-		sort(arr, left, m); // O(n) O(n)
-		sort(arr, m + 1, right); // O(n) O(n)
+		sort(arr, left, m); // O(logn) acause de la division par 2 de m.
+		sort(arr, m + 1, right); // O(logn) acause de la division par 2 de m.
 
 		combine(arr, left, m, right);
 	}
@@ -66,4 +66,4 @@ int main()
 	sort(arr, 0, (sizeof(arr) / sizeof(arr[0])) - 1);
 
 	return 0;
-} // O(n+k)
+} // O(nlogn)

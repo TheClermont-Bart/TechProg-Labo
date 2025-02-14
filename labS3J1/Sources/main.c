@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 #include "labo.h"
 
 /* This code is public domain -- Will Hartung 4/9/09 */
@@ -229,7 +228,7 @@ void verify_sort(FILE* f) {
 }
 
 
-#define HEAP_SIZE 2048 * 2048 * 4
+#define HEAP_SIZE 2048 * 2048 * 8
 static uint8_t* heap = NULL;
 static size_t heap_top = 0;
 void* allocate(size_t size) {

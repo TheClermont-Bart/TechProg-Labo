@@ -1,12 +1,13 @@
 #include <assert.h>
 #include <stdint.h>
 
+
 void* allocate(size_t size);
-
-
-/*
-* Déclarer une structure de donnée appeler Node qui est un noeud d'une liste simplement chaînée.
-*/
+typedef struct Node Node;
+struct Node {
+	void* data;
+	Node* next;
+};
 
 typedef struct person_t {
 	char name[256];
@@ -15,12 +16,14 @@ typedef struct person_t {
 
 
 /*
-* Creer un noeud et l'ajouter apres le noeud currNode. Utiliser la fonction allocate pour allouer de la memoire.
+* Creer un noeud et l'ajouter apres le noeud currNode. 
+Utiliser la fonction allocate pour allouer de la memoire.
 */
 void insert(Node* currNode, void* newData);
 
 /*
-* Creer un noeud et l'ajouter apres le noeud head. Si le noeud head est vide(data) lui donner la nouvelle valeur passer.
+* Creer un noeud et l'ajouter apres le noeud head. 
+Si le noeud head est vide(data) lui donner la nouvelle valeur passer.
 */
 void insertHead(Node* head, void* newData);
 

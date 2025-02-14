@@ -1,0 +1,8 @@
+13 O(n)
+16 O(k)
+22 O(n)
+34 O(n)
+40 O(n)
+53 O(Logn)
+54 O(Logn)
+Total : O(nLogn)
