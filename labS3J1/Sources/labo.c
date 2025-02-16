@@ -54,17 +54,27 @@ Node* removeByData(Node* head, void* rmData) {
 	Node* last = NULL;
 
 	while (temp != NULL && temp->data != rmData) { // Tant que temp est pas NULL et que temp-> egale pas rmData
-		last = temp; // last prend la valeur temp(head)
+		last = temp; // last(NULL) prend la valeur temp(head)
 		temp = temp->next; // temp(head) devien le next
+		
 	}
 	if (temp == NULL) { // Si head est NULL ont sort
 		return; 
 	}
 
-	last->next = temp->next;  // last->next devient temp(head)->next
+	// Un lien du nœud précédant au nœud suivant
+	if (last != NULL) {
+		last->next = temp->next;
+	}
+	else { // Si le nœud à supprimer est le head
+		head = temp->next;
+	}
+
+	//last->data = temp->next;  // last->next devient temp(head)->next
 	
 	memset(temp, 0, sizeof(Node));
 
+	return last;
 }
 
 
@@ -73,10 +83,49 @@ Node* removeByData(Node* head, void* rmData) {
 * Supprimer le noeud ayant le nom passer par name.Par simplicite, pour supprimer faite un memset(node,0,sizeof(Node));
 * Retourner le noeud juste avant celui supprimer
 */
-Node* removeByName(Node* head, char* name) {}
+Node* removeByName(Node* head, char* name) {
+	Node* temp = head;
+	Node* last = NULL;
+
+	while (temp != NULL && temp->data != name) { // Tant que temp est pas NULL et que temp->data egale pas name
+		last = temp; // last(NULL) prend la valeur temp(head)
+		temp = temp->next; // temp(head) devien le next
+		
+	}
+	if (temp == NULL) { // Si head est NULL ont sort
+		return;
+	}
+
+	// last->next = temp->next;  // last->next devient temp(head)->next
+	if (last != NULL) {
+		last->next = temp->next;
+	}
+	else { // Si le nœud à supprimer est le head
+		head = temp->next;
+	}
+
+	memset(temp, 0, sizeof(Node));
+	return last;
+}
 
 
 /*
 * Trier par l'age. Utiliser l'algorithme que vous connaissez le mieux.
 */
-void sort(Node* head) {}
+void sort(Node* head) {
+	Node* i = head;
+	Node* j = i->next;
+	int temp;
+
+	for (i ;i->next != NULL;i = i->next) {
+
+		for (j ;j != NULL;j = j->next) {
+
+			if (i->data < j->data) {
+				temp = i->data;
+				i->data = j->data;
+				j->data = temp;
+			}
+		}
+	}
+}
