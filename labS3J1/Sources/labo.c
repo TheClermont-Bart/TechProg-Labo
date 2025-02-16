@@ -5,7 +5,6 @@
 #include <string.h>
 #include "labo.h"
 
-
 /*
 * Creer un noeud et l'ajouter apres le noeud currNode.
 Utiliser la fonction allocate pour allouer de la memoire.
@@ -105,7 +104,7 @@ Node* removeByName(Node* head, char* name) {
 	}
 
 	memset(temp, 0, sizeof(Node));
-	return last;
+	return last; // Retourner le noeud juste avant celui supprimer
 }
 
 
@@ -115,17 +114,20 @@ Node* removeByName(Node* head, char* name) {
 void sort(Node* head) {
 	Node* i = head;
 	Node* j = i->next;
-	int temp;
 
-	for (i ;i->next != NULL;i = i->next) {
+	for (i = head; i->next != NULL; i = i->next) {
+		for (j = i->next; j != NULL; j = j->next) {
+			Person* person_i = (Person*)i->data; // Apres de longue essaie a comparer i->data & j->data, j'ai compris que l'age n'etait pas pointer\comparer donc j'ai compris qu'il fallait aller chercher la struct pour par la suite aller chercher l'age. J'ai du demander a copilot la syntaxe pour aller la chercher en dehors de labo.c
+			Person* person_j = (Person*)j->data;
+			Person temp;
 
-		for (j ;j != NULL;j = j->next) {
-
-			if (i->data < j->data) {
-				temp = i->data;
-				i->data = j->data;
-				j->data = temp;
+			if (person_i->age > person_j->age) {
+				temp = *person_i;
+				*person_i = *person_j;
+				*person_j = temp;
 			}
 		}
 	}
 }
+
+

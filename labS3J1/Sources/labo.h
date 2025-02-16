@@ -3,7 +3,9 @@
 
 
 void* allocate(size_t size);
+
 typedef struct Node Node;
+
 struct Node {
 	void* data;
 	Node* next;
