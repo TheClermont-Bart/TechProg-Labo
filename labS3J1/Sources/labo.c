@@ -10,16 +10,18 @@
 Utiliser la fonction allocate pour allouer de la memoire.
 */
 void insert(Node* currNode, void* newData) {
-	Node* newNode = (Node*)allocate(sizeof(Node)); // Allouer dynamiquement de la mémoire pour le nouveau nœud
+	Node* newNode = (Node*)allocate(sizeof(Node)); // Creer le noeud et allouer dynamiquement de la mémoire(allocate) pour ce nouveau noeud
 	
-	newNode->data = newData;
-	newNode->next = NULL;
+	newNode->data = newData; // Rajoute nom et age dans data
+	newNode->next = NULL; // Indique que le prochain noeud est la fin
 
-	if (currNode->next != NULL) { //Ajouter apres le noeud currNode NULL.
-		newNode->next = currNode->next;
+	// Fin creation newNode
+
+	if (currNode->next != NULL) { // Si le suivant du noeud actuel est pas vide 
+		newNode->next = currNode->next; // Le suivant du nouveau noeud devient le suivant du noeud actuel
 	}
 	
-	currNode->next = newNode;
+	currNode->next = newNode; // Le suivant du noeud actuel est le nouveau noeud
 }
 
 
@@ -28,16 +30,14 @@ void insert(Node* currNode, void* newData) {
 Si le noeud head est vide(data) lui donner la nouvelle valeur passer.
 */
 void insertHead(Node* head, void* newData) {
-	// Si le nœud head est vide, lui donner la nouvelle valeur
-	if (head->data == NULL) {
+	if (head->data == NULL) { // Si le noeud head est vide, lui donner la nouvelle valeur
 		head->data = newData;
 	}
-	else {
-		// Sinon allouer dynamiquement de la mémoire pour le nouveau nœud
+	else { // Autrement creer un noeud et l'ajouter apres le noeud head.
 		Node* newNode = (Node*)allocate(sizeof(Node));
-		newNode->data = newData;
-		newNode->next = head->next; // Le prochain devient le next.
-		head->next = newNode; // 
+		newNode->data = newData; 
+		newNode->next = head->next; // Le noeud suivant le nouveau noeud devient le suivant du head
+		head->next = newNode; // Le suivant du noeud head devient le nouveau noeud
 	}
 }
 
@@ -52,28 +52,25 @@ Node* removeByData(Node* head, void* rmData) {
 	Node* temp = head;
 	Node* last = NULL;
 
-	while (temp != NULL && temp->data != rmData) { // Tant que temp est pas NULL et que temp-> egale pas rmData
+	while (temp != NULL && temp->data != rmData) { // Tant que temp est pas NULL et que temp->data egale pas rmData
 		last = temp; // last(NULL) prend la valeur temp(head)
-		temp = temp->next; // temp(head) devien le next
+		temp = temp->next; // temp(head) pointe le suivant
 		
 	}
 	if (temp == NULL) { // Si head est NULL ont sort
 		return; 
 	}
 
-	// Un lien du nœud précédant au nœud suivant
-	if (last != NULL) {
+	if (last != NULL) { // Si last est different de NULL le suivant de last devient le suivant de temp
 		last->next = temp->next;
 	}
-	else { // Si le nœud à supprimer est le head
+	else { // Autrement head devient le suivant de temp
 		head = temp->next;
 	}
-
-	//last->data = temp->next;  // last->next devient temp(head)->next
 	
-	memset(temp, 0, sizeof(Node));
+	memset(temp, 0, sizeof(Node)); // Reiniatialisation de la memoire
 
-	return last;
+	return last; // Retourner le noeud juste avant celui supprimer
 }
 
 
@@ -95,11 +92,10 @@ Node* removeByName(Node* head, char* name) {
 		return;
 	}
 
-	// last->next = temp->next;  // last->next devient temp(head)->next
-	if (last != NULL) {
+	if (last != NULL) { // Si last est different de NULL last->next devient temp(head)->next
 		last->next = temp->next;
 	}
-	else { // Si le nœud à supprimer est le head
+	else { // Autrement head devient le suivant de temp
 		head = temp->next;
 	}
 
@@ -112,19 +108,19 @@ Node* removeByName(Node* head, char* name) {
 * Trier par l'age. Utiliser l'algorithme que vous connaissez le mieux.
 */
 void sort(Node* head) {
-	Node* i = head;
-	Node* j = i->next;
+	Node* i = head; // Position 1
+	Node* j = i->next; // Position 2
 
-	for (i = head; i->next != NULL; i = i->next) {
+	for (i = head; i->next != NULL; i = i->next) { // Deux loops pour pointer different index
 		for (j = i->next; j != NULL; j = j->next) {
-			Person* person_i = (Person*)i->data; // Apres de longue essaie a comparer i->data & j->data, j'ai compris que l'age n'etait pas pointer\comparer donc j'ai compris qu'il fallait aller chercher la struct pour par la suite aller chercher l'age. J'ai du demander a copilot la syntaxe pour aller la chercher en dehors de labo.c
-			Person* person_j = (Person*)j->data;
+			Person* person_1 = (Person*)i->data; // Apres de longue essaie a comparer i->data & j->data, j'ai compris que l'age n'etait pas pointer\comparer donc j'ai compris qu'il fallait aller chercher la struct pour par la suite aller chercher l'age. J'ai du demander a copilot la syntaxe pour aller la chercher en dehors de labo.c
+			Person* person_2 = (Person*)j->data;
 			Person temp;
 
-			if (person_i->age > person_j->age) {
-				temp = *person_i;
-				*person_i = *person_j;
-				*person_j = temp;
+			if (person_1->age > person_2->age) { // Si l'age de la person_1 est plus grande que l'age de la person_2 ont fait un swap
+				temp = *person_1;
+				*person_1 = *person_2;
+				*person_2 = temp;
 			}
 		}
 	}
