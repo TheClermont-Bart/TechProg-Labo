@@ -71,10 +71,8 @@ Node* removeNode(Node* currNode) {
 		return NULL;
 	}
 
-	if (currNode != NULL) {
 		currNode->next = NULL;
 		currNode->prev = NULL;
-	}
 
 	return currNode;
 }
@@ -82,21 +80,25 @@ Node* removeNode(Node* currNode) {
 * Ajouter dans le tableau le nom de chacun en ordre alphabetic. Par simplicite, considerer seulement les deux premiere lettre.
 */
 void alphabetise(Node* head, char* names[]){
-	Node* i = head; // Position 1
-	Node* j = i->next; // Position 2
+	Node* noeud1 = head; // Position 1
+	//Node* noeud2 = noeud1->next; // Position 2
 	int count = 0;
+	char* temp;
 
-	for (i = head; i->next != NULL; i = i->next) { // Deux loops pour pointer different index
-		for (j = i->next; j->next != NULL; j = j->next) {
-			Person* person_1 = (Person*)i->data; 
-			Person* person_2 = (Person*)j->data;
-			Person temp;
-			if (person_1->name[0] > person_2->name[0] && person_2->name != names[count])
-			{ 
-				names[count] = person_2->name;
-				count++;
+	for (noeud1 = head; noeud1 != NULL; noeud1 = noeud1->next) {
+		names[count++] = ((Person*)noeud1->data)->name;
+	}
+
+	for (int i = 0; i < count; i++) {
+		for (int j = i+1; j < count; j++) {
+			if (names[i][0] > names[j][0] || (names[i][0] == names[j][0]) && names[i][1] > names[j][1]) {
+				temp = names[j];
+				names[j] = names[i];
+				names[i] = temp;
 			}
 		}
+		
 	}
+
 }
 
