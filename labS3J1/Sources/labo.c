@@ -7,6 +7,7 @@
 
 /*
 * Creer un noeud et l'ajouter apres le noeud currNode.
+* 
 Utiliser la fonction allocate pour allouer de la memoire.
 */
 void insert(Node* currNode, void* newData) {
@@ -36,6 +37,7 @@ void insertHead(Node* head, void* newData) {
 	else { // Autrement creer un noeud et l'ajouter apres le noeud head.
 		Node* newNode = (Node*)allocate(sizeof(Node));
 		newNode->data = newData; 
+
 		newNode->next = head->next; // Le noeud suivant le nouveau noeud devient le suivant du head
 		head->next = newNode; // Le suivant du noeud head devient le nouveau noeud
 	}

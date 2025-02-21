@@ -6,73 +6,97 @@
 #include "labo.h"
 
 /*
-* Creer un noeud et l'ajouter apres le noeud currNode. Considerer la propriete next et prev.
+* Creer un noeud et l'ajouter apres le noeud currNode.
 */
 void insert(Node* currNode, void* newData){
-	Node* newNode = (Node*)allocate(sizeof(Node)); // Allouer dynamiquement de la mémoire pour le nouveau noeud
+	Node* newNode = (Node*)allocate(sizeof(Node)); 
+	newNode->data = newData;
+	newNode->prev = NULL;
+	newNode->next = NULL;
+	
+	if (currNode->next != NULL) { 
+		newNode->next = currNode->next;
+		currNode->next->prev = newNode;
+	}
 
-	newNode->data = newData; // Mettre les newData dans ce newNode->data
-	currNode->next = newNode; // Indique que le suivant de currNode devient notre newNode
-	newNode->prev = currNode; // Indique que le precedent devient le currNode
+	currNode->next = newNode;
+	newNode->prev = currNode;
 }
 
 /*
 * Creer un noeud et l'ajouter apres le noeud de fin. Si le noeud head est vide(data) lui donner la nouvelle valeur passer.
 */
 void insertTail(Node* head, void* newData){
+	Node* newNode = (Node*)allocate(sizeof(Node));
+	newNode->data = newData;
+	newNode->prev = NULL;
+	newNode->next = NULL;
 	
-	if (head->data != NULL) { // S'il n'a rien dans les data du head
-		head->data = newData; // Donner les newData au head
+	if (head->data == NULL) {
+		head->data = newData;
+		head->prev = head;
+		head->next = head;
+		return;
 	}
-	else {
-		Node* newNode = (Node*)allocate(sizeof(Node));
-		newNode->data = newData; // Ajout des newData
-		newNode->prev = NULL; // Le precedent du newNode est le noeud de fin
-	}
+
+	newNode->next = head;
+	newNode->prev = head->prev;
+	head->prev = newNode;
+	
 }
 
 /*
 * Creer un noeud et l'ajouter apres le noeud head. Si le noeud head est vide(data) lui donner la nouvelle valeur passer.
 */
-void insertHead(Node* head, void* newData){
+void insertHead(Node* head, void* newData) {
+	
 
-	if (head->data == NULL) { // Si le noeud head a rien dans data lui donner newData
+	if (head->data == NULL) {
 		head->data = newData;
-		return; // Important sinon il le programme continue
+		head->prev = head;
+		head->next = head;
+		return;
 	}
-		
-		Node* newNode = (Node*)allocate(sizeof(Node)); // Creation nouveau noeud
-		newNode->data = newData; // Donner newData a newNode->data
-		newNode->prev = head; // Le precedent est le head
-		newNode->next = head->next; // Le suivant du newNode est le suivant du head
-
-		head->next = newNode; // Le suivant de head devient newNode
+	insert(head, newData);
 }
 
 /*
 * Enlever le noeud de la liste et retourner le noeud avec aucune reference(i.e. next et prev == NULL)
 */
-Node* removeNode(Node* currNode){
+Node* removeNode(Node* currNode) {
+	Node* temp = (Node*)allocate(sizeof(Node));
+	temp = currNode;
+
+	if (currNode == NULL) {
+		return NULL;
+	}
+
 	if (currNode != NULL) {
-		Node* newNode = (Node*)allocate(sizeof(Node));
-		newNode->data = currNode->data;
-		newNode->next = NULL;
-		newNode->prev = NULL;
-		return newNode;
+		currNode->next = NULL;
+		currNode->prev = NULL;
 	}
-	else {
-		Node* temp = currNode;
-		temp->prev = temp->next;
-		temp->next = temp->prev;
 
-		free(temp);
-	}
-	return 0;
-
+	return currNode;
 }
-
 /*
 * Ajouter dans le tableau le nom de chacun en ordre alphabetic. Par simplicite, considerer seulement les deux premiere lettre.
 */
-void alphabetise(Node* head, char* names[]){}
+void alphabetise(Node* head, char* names[]){
+	Node* i = head; // Position 1
+	Node* j = i->next; // Position 2
+	int count = 0;
+
+	for (i = head; i->next != NULL; i = i->next) { // Deux loops pour pointer different index
+		for (j = i->next; j->next != NULL; j = j->next) {
+			Person* person_1 = (Person*)i->data; 
+			Person* person_2 = (Person*)j->data;
+			Person temp;
+			if (person_1->name[0] > person_2->name[0] && person_2->name != names[count])
+			{ 
+				names[count] = person_2->name;
+				count++;
+			}
+		}
+	}
+}
 
