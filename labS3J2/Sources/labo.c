@@ -81,7 +81,6 @@ Node* removeNode(Node* currNode) {
 */
 void alphabetise(Node* head, char* names[]){
 	Node* noeud1 = head; // Position 1
-	//Node* noeud2 = noeud1->next; // Position 2
 	int count = 0;
 	char* temp;
 
