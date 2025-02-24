@@ -5,16 +5,17 @@
 
 
 /*
-* Ajouter l'element sur la queue/file.
+Ajouter l'element sur la queue/file.
 */
 void push(Queue* q, Node* n) {
-	if (q->next == NULL) {
-		q->next = q->prev = n;
+	if (q->next == NULL) { // Si la file est vide
+		q->next = q->prev = n; // Le nouveau noeud n est ajouter comme premier element de la file
 	}
-	else {
-		Node* last = q->next;
-		n->next = last;
-		last->prev = n;
+	else { // Si file pas vide
+		Node* last = q->next;//Creer nouveau noeud avec la reference du dernier
+
+		n->next = last; // Le suivant du nouveau noeud devien le dernier JE BUG
+		last->prev = n; // 
 		q->next = n;
 	}
 }
@@ -46,10 +47,14 @@ Node* peek(Queue* q){
 }
 
 /*
-* Ajouter l'element sur la queue/file comme si elle serait une priority queue. Utiliser l'age afin de "trie" a chaque push.La personne au premier pop() est la plus jeune.
-* On utilise pas une fonction de tri.
+Ajouter l'element sur la queue/file comme si elle serait une priority queue. 
+Utiliser l'age afin de "trie" a chaque push.
+La personne au premier pop() est la plus jeune.
+On utilise pas une fonction de tri.
 */
-void pushAsPriorityQueue(Queue* q, Node* n){}
+void pushAsPriorityQueue(Queue* q, Node* n){
+	
+}
 
 
 /*

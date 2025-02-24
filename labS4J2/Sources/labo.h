@@ -18,6 +18,7 @@ struct Node {
 
 typedef Node Queue;
 
+
 typedef struct person_t {
 	char name[256];
 	size_t age;
