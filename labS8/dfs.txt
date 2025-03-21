@@ -1,0 +1,5 @@
+Pour programmer l’algorithme nous allons utiliser une pile.
+
+1. Vérifier si ma stack est vide, sinon on pop l’élément du top
+2. Dans un algorithme de recherche on aurait une comparaison, comme exemple, si le character est F on a trouver le noeud puis on retournerais le noeud
+3. Après la comparaison, on considère ce noeud comme le noeud courant et on push le right puis le left, on push le left en dernier puisque l’on veut aller en profondeur avant d’aller latéralement. On recommence.
