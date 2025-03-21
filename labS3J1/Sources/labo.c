@@ -9,9 +9,9 @@
 * Creer un noeud et l'ajouter apres le noeud currNode.
 * 
 Utiliser la fonction allocate pour allouer de la memoire.
-*/
+*/ 
 void insert(Node* currNode, void* newData) {
-	Node* newNode = (Node*)allocate(sizeof(Node)); // Creer le noeud et allouer dynamiquement de la mémoire(allocate) pour ce nouveau noeud
+	Node* newNode = (Node*)allocate(sizeof(Node)); // Creer le noeud et allouer dynamiquement de la mï¿½moire(allocate) pour ce nouveau noeud
 	
 	newNode->data = newData; // Rajoute nom et age dans data
 	newNode->next = NULL; // Indique que le prochain noeud est la fin

@@ -17,7 +17,7 @@ void push(Queue* q, Node* n) {
 		n->next = last;
 		last->prev = n; 
 
-		q->next = n; 
+		q->next = n; // De la maniere que je comprends de ce push, l'element n est inserer au debut de la queue car q->next(head) = n......C'est pas FIFO
 	}
 }
 
@@ -25,21 +25,19 @@ void push(Queue* q, Node* n) {
 * Enlever l'element de la queue/file et retourner le noeud. Si jamais il n'y a pas de noeud, retourner NULL.
 */
 Node* pop(Queue* q){
-	if (q->next == NULL) {
-		return; 
-	}
 
 	Node* n = q->prev;
 
-	if (q->prev != NULL) {
+	if (q->prev != NULL) {  
 		if (q->prev == q->next) {
 			q->next = q->prev = NULL;
 		}
 		else {
-			q->prev = q->prev->prev;
+			q->prev = q->prev->prev; 
 		}
 	}
-	return n;
+	return n; // Ici c'est demander d'enlever l'element de la queue et retourner le noeud mais au final selon le pseudo code on retourne le dernier.... 
+			  // Ca non plus c'est pas FIFO...
 }
 
 
@@ -51,7 +49,7 @@ Node* peek(Queue* q){
 	if (q->next == NULL) {
 		return NULL;
 	}
-	return q->prev;
+	return q->prev; // Ce peek renvoie bien l'element de la fin selon ce que je comprends OK
 }
 
 /*
@@ -65,19 +63,36 @@ void pushAsPriorityQueue(Queue* q, Node* n) {
 		q->next = q->prev = n;
 		return;
 	}
+	
 
-	// Je te l'envoie pas fini donc ca l'arrete ici... Je vais quand meme essayer de le finir completement demain
+	// Besoin de comprendre la logique plus haut pour regler ca et le prochain.......
+	// Serait censer avoir 2 if dans cette fonction
+	// Ont ma aussi parler de insertionSort afin d'y arriver...
 	Node* n2 = q->next;
+
 
 	while (n2 != NULL) {
 
 		Person* person_n = (Person*)n->data;
 		Person* person_n2 = (Person*)n2->data;
-		
-		if (person_n->age > person_n2->age) {
-		}
 
-		n2 = n2->next;
+		if (person_n->age > person_n2->age) {
+			if (n2->prev != NULL) {
+				n->prev = n2->prev;
+				n2->prev->next = n;
+			}
+			n2->prev = n;
+			n->next = n2;
+			break;
+		}
+		
+		else { n2 = n2->next; }
+
+		if (n2 == NULL) {
+			n->prev = q->prev;
+			q->prev->next = n;
+			q->prev = n;
+		}
 
 	}
 }

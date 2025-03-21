@@ -16,7 +16,7 @@ struct Node {
 	Node* next;
 };
 
-typedef Node Queue;
+typedef Node Queue; // C'est pas une queue debord..... 
 
 
 typedef struct person_t {
